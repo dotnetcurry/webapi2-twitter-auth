@@ -1,0 +1,28 @@
+﻿<div class="todoList" id="registerPanel">
+    <h2>Sign up</h2>
+    <form id="registerForm">
+        <fieldset>
+            <legend>Registration Form</legend>
+            <ul class="validation-summary-errors" data-bind="foreach: errors">
+                <li data-bind="text: $data"></li>
+            </ul>
+            <ol>
+                <li>
+                    <label for="UserName">User name</label>
+                    <input type="text" name="UserName" data-bind="value: userName, hasfocus: true" />
+                </li>
+                <li>
+                    <label for="Password">Password</label>
+                    <input type="password" name="Password" data-bind="value: password" />
+                </li>
+                <li>
+                    <label for="ConfirmPassword">Confirm password</label>
+                    <input type="password" name="ConfirmPassword" data-bind="value: confirmPassword" />
+                </li>
+            </ol>
+            <button type="submit" data-bind="click: registerClick, enable: !registering()">Sign up</button>
+        </fieldset>
+    </form>
+
+    <p>Already signed up? <a href="#" data-bind="click: loginClick">Log in</a></p>
+</div>

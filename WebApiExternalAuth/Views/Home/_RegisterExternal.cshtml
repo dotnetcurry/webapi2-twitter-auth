@@ -1,0 +1,22 @@
+﻿<div class="todoList" id="registerPanel">
+    <h2 data-bind="text: 'Associate your ' + loginProvider() + ' account.'"></h2>
+    <form id="registerForm">
+        <fieldset>
+            <legend>Association Form</legend>
+            <p>
+                You've successfully authenticated with <strong data-bind="text: loginProvider"></strong>.
+                Please enter a user name for this site below and click the Sign up button to finish logging in.
+            </p>
+            <ul class="validation-summary-errors" data-bind="foreach: errors">
+                <li data-bind="text: $data"></li>
+            </ul>
+            <ol>
+                <li>
+                    <label for="UserName">User name</label>
+                    <input type="text" name="UserName" data-bind="value: userName, hasfocus: true" />
+                </li>
+            </ol>
+            <button type="submit" data-bind="click: registerClick, enable: !registering()">Sign up</button>
+        </fieldset>
+    </form>
+</div>

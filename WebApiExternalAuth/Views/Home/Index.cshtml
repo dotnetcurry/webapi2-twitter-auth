@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "My Todo List";
+}
+
+<div data-bind="with: loading">Loading...</div>
+<div style="display: none" data-bind="visible: true">
+    <div id="userSettings" data-bind="with: user">
+        Hello, <a href="#" data-bind="text: name, click: manage"></a>
+        &nbsp;<a href="#" data-bind="click: logOff">Log off</a>
+    </div>
+
+    <div id="body">
+        <header>
+            <h1>@ViewBag.Title</h1>
+        </header>
+
+        <div id="main-content">
+            <div data-bind="foreach: errors">
+                <p class="error" data-bind="text: $data"></p>
+            </div>
+            <!-- ko with: todo -->
+            @Html.Partial("_Todo")
+            <!-- /ko -->
+            <!-- ko with: login -->
+            @Html.Partial("_Login")
+            <!-- /ko -->
+            <!-- ko with: register -->
+            @Html.Partial("_Register")
+            <!-- /ko -->
+            <!-- ko with: registerExternal -->
+            @Html.Partial("_RegisterExternal")
+            <!-- /ko -->
+            <!-- ko with: manage -->
+            @Html.Partial("_Manage")
+            <!-- /ko -->
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/knockout")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/todo")
+}

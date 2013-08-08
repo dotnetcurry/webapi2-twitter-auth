@@ -1,0 +1,51 @@
+﻿<div class="todoList" id="loginPanel">
+    <section id="localLoginPanel">
+        <h2>Log in</h2>
+        <form id="loginForm">
+            <fieldset>
+                <legend>Log in Form</legend>
+                <ul class="validation-summary-errors" data-bind="foreach: errors">
+                    <li data-bind="text: $data"></li>
+                </ul>
+                <ol>
+                    <li>
+                        <label for="UserName">User name</label>
+                        <input type="text" name="UserName" data-bind="value: userName, hasfocus: true" />
+                        <span data-bind="visible: userName.hasError, text: userName.errorMessage"></span>
+                    </li>
+                    <li>
+                        <label for="Password">Password</label>
+                        <input type="password" name="Password" data-bind="value: password" />
+                        <span data-bind="visible: password.hasError, text: password.errorMessage"></span>
+                    </li>
+                    <li>
+                        <input type="checkbox" name="RememberMe" data-bind="checked: rememberMe" />
+                        <label class="checkbox" for="RememberMe">Remember me?</label>
+                    </li>
+                </ol>
+                <button type="submit" data-bind="click: loginClick, enable: !loggingIn()">Log in</button>
+            </fieldset>
+        </form>
+    </section>
+    <section id="socialLoginPanel">
+        <h2>Log in using another service</h2>
+        <div data-bind="visible: loadingExternalLogin">Loading...</div>
+        <div data-bind="visible: !loadingExternalLogin()">
+            <div class="message-info" data-bind="visible: !externalLoginVisible()">
+                <p>
+                    There are no external authentication services configured. See <a href="http://go.microsoft.com/fwlink/?LinkId=252166">this article</a>
+                    for details on setting up this ASP.NET application to support logging in via external services.
+                </p>
+            </div>
+            <form data-bind="visible: externalLoginVisible">
+                <fieldset id="socialLoginList">
+                    <legend>Log in using another service</legend>
+                    <p data-bind="foreach: externalLoginProviders">
+                        <button type="submit" data-bind="text: name, attr: { title: 'Log in using your ' + name() + ' account' }, click: loginClick"></button>
+                    </p>
+                </fieldset>
+            </form>
+        </div>
+    </section>
+    <p>First time here? <a href="#" data-bind="click: registerClick">Sign up</a></p>
+</div>

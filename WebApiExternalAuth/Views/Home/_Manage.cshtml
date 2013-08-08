@@ -1,0 +1,102 @@
+﻿<div data-bind="visible: loading">Loading...</div>
+<div id="todoPanel" data-bind="visible: !loading()">
+    <p class="message-success" data-bind="text: message"></p>
+    <p><a href="#" data-bind="click: todo">Back to My Todo List</a></p>
+
+    <section class="todoList">
+        <div data-bind="with: changePassword">
+            <p>You're logged in as <strong data-bind="text: name"></strong>.</p>
+
+            <h3>Change password</h3>
+
+            <form id="changePasswordForm">
+                <fieldset>
+                    <legend>Change Password Form</legend>
+                    <ul class="validation-summary-errors" data-bind="foreach: errors">
+                        <li data-bind="text: $data"></li>
+                    </ul>
+                    <ol>
+                        <li>
+                            <label for="OldPassword">Current password</label>
+                            <input type="password" name="OldPassword" data-bind="value: oldPassword" />
+                        </li>
+                        <li>
+                            <label for="NewPassword">New password</label>
+                            <input type="password" name="NewPassword" data-bind="value: newPassword" />
+                        </li>
+                        <li>
+                            <label for="ConfirmPassword">Confirm new password</label>
+                            <input type="password" name="ConfirmPassword" data-bind="value: confirmPassword" />
+                        </li>
+                    </ol>
+                    <button type="submit" data-bind="click: changeClick, enable: !changing()">Change password</button>
+                </fieldset>
+            </form>
+        </div>
+        <div data-bind="with: setPassword">
+            <p>You do not have a local username/password for this site. Add a local account so you can log in without an external login.</p>
+            <form id="changePasswordForm">
+                <fieldset>
+                    <legend>Create Local Login</legend>
+                    <ul class="validation-summary-errors" data-bind="foreach: errors">
+                        <li data-bind="text: $data"></li>
+                    </ul>
+                    <ol>
+                        <li>
+                            <label for="NewPassword">New password</label>
+                            <input type="password" name="NewPassword" data-bind="value: newPassword" />
+                        </li>
+                        <li>
+                            <label for="ConfirmPassword">Confirm new password</label>
+                            <input type="password" name="ConfirmPassword" data-bind="value: confirmPassword" />
+                        </li>
+                    </ol>
+                    <button type="submit" data-bind="click: setClick, enable: !setting()">Set password</button>
+                </fieldset>
+            </form>
+        </div>
+    </section>
+
+    <section class="todoList" id="externalLogins">
+        <ul class="validation-summary-errors" data-bind="foreach: errors">
+            <li data-bind="text: $data"></li>
+        </ul>
+
+        <div data-bind="if: logins().length > 0">
+            <h3>Registered logins</h3>
+            <table>
+                <tbody data-bind="foreach: logins">
+                    <tr>
+                        <td data-bind="text: loginProvider"></td>
+                        <td>
+                            <div data-bind="if: $parent.showRemoveButton">
+                                <form>
+                                    <fieldset>
+                                        <button type="submit" data-bind="attr: { title: 'Remove this ' + loginProvider() + ' credential from your account' }, click: removeClick, enable: !removing()">Remove</button>
+                                    </fieldset>
+                                </form>
+                            </div>
+                            <span data-bind="if: !$parent.showRemoveButton()">&nbsp;</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3>Add an external login</h3>
+        <div class="message-info" data-bind="visible: !externalLoginVisible()">
+            <p>
+                There are no external authentication services configured. See <a href="http://go.microsoft.com/fwlink/?LinkId=252166">this article</a>
+                for details on setting up this ASP.NET application to support logging in via external services.
+            </p>
+        </div>
+        <form data-bind="visible: externalLoginVisible">
+            <fieldset id="socialLoginList">
+                <legend>Log in using another service</legend>
+                <p data-bind="foreach: externalLoginProviders">
+                    <button type="submit" data-bind="text: name, attr: { title: 'Log in using your ' + name() + ' account' }, click: loginClick"></button>
+                </p>
+            </fieldset>
+        </form>
+    </section>
+</div>
